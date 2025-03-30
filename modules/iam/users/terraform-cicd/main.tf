@@ -22,12 +22,23 @@ resource "aws_iam_policy" "cross_account_s3" {
         Action = [
           "s3:ListBucket",
           "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject",
           "s3:GetBucketLocation"
         ]
         Resource = [
           "arn:aws:s3:::${var.state_s3_bucket_name}",
           "arn:aws:s3:::${var.state_s3_bucket_name}/*"
         ]
+      },
+    {
+        Effect = "Allow"
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:DeleteItem"
+        ]
+        Resource = "arn:aws:s3:::terraform-state-lock"
       }
     ]
   })
