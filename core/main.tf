@@ -5,5 +5,5 @@ provider "aws" {
 data "aws_caller_identity" "current" {}
 
 module "state-s3" {
-  source = "../state-s3"
+  source = "../modules/state-s3"
 }
